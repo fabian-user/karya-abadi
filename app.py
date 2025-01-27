@@ -525,9 +525,9 @@ def categories():
 # if __name__ == '__main__':
 #     app.run()
     
-if __name__ == '__main__':
-    app.run()
+if name == 'main':
+    app.run(host=10000, port='0.0.0.0')
 else:
-    gunicorn_app = app.run()
+    gunicorn_app = app.run(host=10000, port='0.0.0.0')
 
 
