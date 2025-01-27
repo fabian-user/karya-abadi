@@ -11,7 +11,7 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
 app.secret_key = 'kayaabadi'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/karya_abadi'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://ulowousrw0ogyvoj:4LBHdOCx4lQvcea7mBsA@b4a2bvewihwdrwvkpgpj-mysql.services.clever-cloud.com:3306/b4a2bvewihwdrwvkpgpj'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
