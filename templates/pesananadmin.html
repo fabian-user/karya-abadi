@@ -1,0 +1,208 @@
+{% extends "template.html" %} {% block content %}
+<section class="container">
+  <h1 style="text-align: center; margin-top: 20px">Daftar Pesanan</h1>
+
+  {% if orders %}
+  <table
+    style="
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+      font-family: Arial, sans-serif;
+    "
+  >
+    <thead>
+      <tr style="background-color: #f8f8f8; border-bottom: 2px solid #ddd">
+        <th style="padding: 15px; text-align: center">ID Pesanan</th>
+        <th style="padding: 15px; text-align: center">Nama Pelanggan</th>
+        <th style="padding: 15px; text-align: center">Metode Pembayaran</th>
+        <th style="padding: 15px; text-align: center">Metode Pengiriman</th>
+        <th style="padding: 15px; text-align: center">Total Harga</th>
+        <th style="padding: 15px; text-align: center">Status Pembayaran</th>
+        <th style="padding: 15px; text-align: center"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in orders %}
+      <tr style="border-bottom: 1px solid #ddd">
+        <td style="padding: 10px; text-align: center">{{ order.id }}</td>
+        <td style="padding: 10px; text-align: center">
+          {{ order.customer_name }}
+        </td>
+        <td style="padding: 10px; text-align: center">
+          {{ order.payment_method }}
+        </td>
+        <td style="padding: 10px; text-align: center">
+          {{ order.shipping_method }}
+        </td>
+        <td style="padding: 10px; text-align: center">
+          Rp. {{ order.total_price|int }}
+        </td>
+        <td style="padding: 10px; text-align: center">
+          {{ order.payment_status }}
+        </td>
+        <td style="padding: 10px; text-align: center">
+          <div style="display: flex; justify-content: center; gap: 10px">
+            <form
+              action="{{ url_for('verify_order', order_id=order.id) }}"
+              method="post"
+              style="display: inline-block"
+            >
+              <button
+                type="submit"
+                style="
+                  background-color: #4caf50;
+                  color: white;
+                  border: none;
+                  padding: 10px 20px;
+                  border-radius: 4px;
+                  cursor: pointer;
+                "
+              >
+                Verifikasi
+              </button>
+            </form>
+            <!-- Delete Form -->
+            <form
+              action="{{ url_for('delete_order', order_id=order.id) }}"
+              method="POST"
+              id="deleteForm-{{ order.id }}"
+              style="display: inline-block"
+              onsubmit="return false;"
+            >
+              <button
+                type="button"
+                class="btn btn-danger"
+                onclick="confirmDelete('{{ url_for('delete_order', order_id=order.id) }}', '{{ order.id }}')"
+              >
+                Hapus
+              </button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p style="text-align: center; margin-top: 20px">
+    Tidak ada pesanan yang menunggu verifikasi.
+  </p>
+  {% endif %}
+</section>
+
+<!-- Delete Confirmation Modal -->
+<div
+  id="deleteModal"
+  style="
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  "
+>
+  <div
+    style="
+      background-color: white;
+      width: 300px;
+      padding: 20px;
+      margin: 100px auto;
+      border-radius: 8px;
+      text-align: center;
+    "
+  >
+    <h2>Konfirmasi Hapus</h2>
+    <p>Apakah Anda yakin ingin menghapus pesanan ini?</p>
+    <div
+      style="
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+      "
+    >
+      <form id="deleteForm" method="post" action="">
+        <button
+          type="submit"
+          style="
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+          "
+        >
+          Hapus
+        </button>
+      </form>
+      <form onsubmit="cancelDelete(); return false;">
+        <button
+          type="submit"
+          style="
+            background-color: gray;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+          "
+        >
+          Batal
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  function confirmDelete(url, orderId) {
+    // Set the action URL for the form
+    document.getElementById("deleteForm").action = url;
+    // Set the modal to show
+    document.getElementById("deleteModal").style.display = "block";
+  }
+
+  function cancelDelete() {
+    // Hide the modal
+    document.getElementById("deleteModal").style.display = "none";
+  }
+</script>
+
+<style>
+  .btn-danger {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px; /* Same padding as Verifikasi */
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px; /* Adjusted font size */
+  }
+
+  .btn-danger:hover {
+    background-color: #d32f2f;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Optional: Apply the same styling to 'Verifikasi' button for consistency */
+  button[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px; /* Match padding */
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px; /* Adjusted font size */
+  }
+
+  button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+</style>
+
+{% endblock %}

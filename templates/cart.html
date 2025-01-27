@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keranjang Belanja</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='cart.css') }}"
+    />
+  </head>
+  <body>
+    {% extends "template.html" %} {% block content %}
+    <section class="container">
+      <h1>Keranjang Belanja Anda</h1>
+
+      {% if cart %}
+      <ul class="cart-list">
+        {% for item in cart %}
+        <li class="cart-item">
+          <div class="cart-item-left">
+            <img
+              src="{{ url_for('static', filename='uploads/' + (item.image if item.image else 'default.jpg')) }}"
+              alt="{{ item.name }}"
+              class="product-image"
+            />
+          </div>
+          <div class="cart-item-right">
+            <div class="product-info">
+              <h5>{{ item.name }}</h5>
+              <p>Harga: Rp. {{ item.price|int }}</p>
+            </div>
+
+            <div class="quantity-actions">
+              <form
+                action="{{ url_for('view_cart') }}"
+                method="POST"
+                style="display: inline"
+              >
+                <input type="hidden" name="product_id" value="{{ item.id }}" />
+                <input type="hidden" name="action" value="decrease" />
+                <button type="submit" class="btn btn-warning">-</button>
+              </form>
+
+              <p class="quantity">{{ item.quantity }}</p>
+
+              <form
+                action="{{ url_for('view_cart') }}"
+                method="POST"
+                style="display: inline"
+              >
+                <input type="hidden" name="product_id" value="{{ item.id }}" />
+                <input type="hidden" name="action" value="increase" />
+                <button type="submit" class="btn btn-success">+</button>
+              </form>
+            </div>
+
+            <form
+              action="{{ url_for('pengahapusproduk', product_id=item.id) }}"
+              method="POST"
+              style="display: inline"
+            >
+              <button type="submit" class="btn btn-danger">
+                Hapus dari Keranjang
+              </button>
+            </form>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+
+      <div class="cart-total">
+        <h4>Total: Rp. {{ cart_total|int }}</h4>
+      </div>
+
+      <form
+        action="{{ url_for('pembayaran') }}"
+        method="GET"
+        style="margin-top: 20px"
+      >
+        <button type="submit" class="btn btn-primary btn-lg">Bayar</button>
+      </form>
+      {% else %}
+      <div class="empty-cart">
+        <p class="empty-message">
+          Keranjang Anda kosong. Silakan tambahkan produk terlebih dahulu.
+        </p>
+        <form action="{{ url_for('home') }}" method="GET">
+          <button type="submit" class="btn btn-secondary">
+            Kembali ke Beranda
+          </button>
+        </form>
+      </div>
+      {% endif %}
+    </section>
+    {% endblock %}
+  </body>
+</html>

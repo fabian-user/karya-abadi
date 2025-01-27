@@ -1,0 +1,4 @@
+{
+    "builds": [{ "src": "karyaabadi.py", "use": "@vercel/python" }],
+    "routes": [{ "src": "/(.*)", "dest": "karyaabadi.py" }]
+}

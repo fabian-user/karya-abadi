@@ -1,0 +1,23 @@
+{% extends "template.html" %} {% block content %}
+<main>
+  <section>
+    <h1>Login Admin</h1>
+    <form action="{{ url_for('loginadmin') }}" method="POST">
+      <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required />
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+      </div>
+      <div>
+        <button type="submit">Masuk</button>
+      </div>
+    </form>
+    {% if error %}
+    <p style="color: red">{{ error }}</p>
+    {% endif %}
+  </section>
+</main>
+{% endblock %}

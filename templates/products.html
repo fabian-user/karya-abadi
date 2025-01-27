@@ -1,0 +1,23 @@
+{% extends "template.html" %} {% block content %}
+<section class="container">
+  <h1>Kategori</h1>
+  <ul>
+    {% for product in products %}
+    <li class="product-card">
+      <!-- Menambahkan link ke halaman detail produk -->
+      <a href="{{ url_for('product_detail', product_id=product.id) }}">
+        <img
+          src="{{ url_for('static', filename='uploads/' + product.image if product.image else 'default-image.jpg') }}"
+          alt="{{ product.name }}"
+          width="200"
+        />
+        <h4>{{ product.name }}</h4>
+        <p>{{ product.description }}</p>
+        <p class="price">Price: Rp. {{ product.price|int }}</p>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+
+{% endblock %}

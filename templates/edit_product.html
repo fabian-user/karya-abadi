@@ -1,0 +1,42 @@
+{% extends "template.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Edit Produk: {{ product.name }}</h1>
+    <form method="POST" action="{{ url_for('edit_product', product_id=product.id) }}" enctype="multipart/form-data">
+        <!-- Nama Produk -->
+        <div class="mb-3">
+            <label for="name" class="form-label">Nama Produk</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ product.name }}" required>
+        </div>
+
+        <!-- Harga Produk -->
+        <div class="mb-3">
+            <label for="price" class="form-label">Harga</label>
+            <input type="number" class="form-control" id="price" name="price" value="{{ product.price }}" step="0.01" required>
+        </div>
+
+        <!-- Deskripsi Produk -->
+        <div class="mb-3">
+            <label for="description" class="form-label">Deskripsi</label>
+            <textarea class="form-control" id="description" name="description" required>{{ product.description }}</textarea>
+        </div>
+
+        <!-- Gambar Produk -->
+        <div class="mb-3">
+            <label for="image" class="form-label">Gambar Produk</label>
+            <input class="form-control" type="file" id="image" name="image" accept="image/*">
+            {% if product.image %}
+                <p>Gambar saat ini:</p>
+                <img src="{{ url_for('static', filename='uploads/' + product.image) }}" alt="{{ product.name }}" style="width: 100px; height: auto;">
+            {% else %}
+                <p>Tidak ada gambar</p>
+            {% endif %}
+        </div>
+
+        <!-- Tombol Simpan -->
+        <button type="submit" class="btn btn-warning">Simpan</button>
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">Batal</a>
+    </form>
+</div>
+{% endblock %}

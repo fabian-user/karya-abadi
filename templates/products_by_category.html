@@ -1,0 +1,39 @@
+{% extends "template.html" %} {% block content %}
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Produk - {{ category.name }}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='category.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Produk dalam Kategori: {{ category.name }}</h1>
+      <div class="product-cards">
+        {% for product in products %}
+        <div class="product-card">
+          <img
+            src="{{ url_for('static', filename='uploads/' + product.image) }}"
+            alt="{{ product.name }}"
+            class="product-image"
+          />
+          <div class="product-info">
+            <h3 class="product-name">{{ product.name }}</h3>
+            <p class="product-price">Harga: Rp {{ product.price }}</p>
+            <a
+              href="{{ url_for('product_detail', product_id=product.id) }}"
+              class="btn-detail"
+              >Lihat Detail</a
+            >
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>
+{% endblock %}

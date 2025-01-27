@@ -1,0 +1,119 @@
+{% extends "template.html" %} {% block content %}
+<section class="container">
+  <h1>Pembayaran</h1>
+
+  {% if cart %}
+  <form action="{{ url_for('pembayaran') }}" method="post">
+    <h4>Informasi Pengiriman</h4>
+
+    <div style="display: flex; gap: 20px">
+      <div style="flex: 1">
+        <label for="first_name">Nama Depan:</label>
+        <input
+          type="text"
+          id="first_name"
+          name="first_name"
+          required
+          style="width: 80%; padding: 8px"
+        />
+      </div>
+      <div style="flex: 1">
+        <label for="last_name">Nama Belakang:</label>
+        <input
+          type="text"
+          id="last_name"
+          name="last_name"
+          required
+          style="width: 80%; padding: 8px"
+        />
+      </div>
+    </div>
+    <br />
+
+    <div>
+      <label for="phone">Nomor Telepon:</label>
+      <div style="display: flex; align-items: center">
+        <span style="padding-right: 10px">+62</span>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          required
+          style="width: 35%; padding: 8px"
+          pattern="[0-9]{9,12}"
+        />
+      </div>
+      <br /><br />
+    </div>
+    <div>
+      <label for="address">Alamat Rumah:</label>
+      <input
+        type="text"
+        id="address"
+        name="address"
+        required
+        style="width: 95%"
+      /><br /><br />
+    </div>
+    <div>
+      <label for="postal_code">Kode Pos:</label>
+      <input
+        type="text"
+        id="postal_code"
+        name="postal_code"
+        required
+        style="width: 95%"
+      /><br /><br />
+    </div>
+
+    <h4>Pilih Metode Pengiriman</h4>
+    <div>
+      <label>
+        <input type="radio" name="shipping_method" value="Dikirim" required />
+        Dikirim
+      </label>
+    </div>
+    <div>
+      <label>
+        <input
+          type="radio"
+          name="shipping_method"
+          value="Diambil Ketempat"
+          required
+        />
+        Diambil Ketempat
+      </label>
+    </div>
+
+    <h4>Pilih Metode Pembayaran</h4>
+    <div>
+      <label>
+        <input type="radio" name="payment_method" value="BCA" required />
+        BCA
+      </label>
+    </div>
+    <div>
+      <label>
+        <input type="radio" name="payment_method" value="Mandiri" required />
+        Mandiri
+      </label>
+    </div>
+    <div>
+      <label>
+        <input type="radio" name="payment_method" value="QRIS" required />
+        QRIS
+      </label>
+    </div>
+
+    <!-- Menampilkan Total Pembayaran di atas tombol Bayar -->
+    <h3>Total Pembayaran: Rp {{ cart_total|int }}</h3>
+
+    <button type="submit">Bayar</button>
+  </form>
+
+  {% else %}
+  <p>Keranjang Anda kosong.</p>
+  <a href="{{ url_for('home') }}">Kembali ke Beranda</a>
+  {% endif %}
+</section>
+{% endblock %}

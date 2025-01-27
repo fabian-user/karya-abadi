@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Detail</title>
+</head>
+<body>
+
+    <h2>Detail Order</h2>
+    <table>
+        <tr>
+            <th>Nama Pelanggan</th>
+            <td>{{ order.customer_name }}</td>
+        </tr>
+        <tr>
+            <th>Metode Pengiriman</th>
+            <td>{{ order.shipping_method }}</td>
+        </tr>
+        <tr>
+            <th>Metode Pembayaran</th>
+            <td>{{ order.payment_method }}</td>
+        </tr>
+        <tr>
+            <th>Total Harga</th>
+            <td>{{ order.total_price }}</td>
+        </tr>
+    </table>
+
+    <h3>Detail Produk:</h3>
+    <ul>
+        {% for item in order.cart_data %}
+            <li>
+                <strong>{{ item.name }}</strong><br>
+                Harga: {{ item.price }}<br>
+                Jumlah: {{ item.quantity }}<br>
+                Subtotal: {{ item.price * item.quantity }}
+            </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>

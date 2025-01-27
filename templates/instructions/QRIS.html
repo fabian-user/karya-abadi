@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Konfirmasi Pembayaran</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f9;
+      }
+      .container {
+        max-width: 500px;
+        margin: 50px auto;
+        background: white;
+        padding: 100px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        text-align: center;
+      }
+      h1 {
+        color: #333;
+        margin-bottom: 20px;
+      }
+      .status-message {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+      }
+      .account-details {
+        margin-top: 20px;
+      }
+      .account-details img {
+        max-width: 100%;
+        height: auto;
+        margin: 10px 0;
+        border-radius: 5px;
+      }
+      .btn {
+        margin-top: 30px;
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+      .btn:hover {
+        background-color: #218838;
+      }
+      .btn-secondary {
+        background-color: #007bff;
+        margin-top: 15px;
+      }
+      .btn-secondary:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Konfirmasi Pembayaran</h1>
+
+      <!-- Status Konfirmasi Pembayaran -->
+      <div class="status-message">
+        <strong>Terima Kasih!</strong> Silahkan kirim bukti pembayaran anda ke
+        whatsapp kami.
+      </div>
+
+      <!-- Rincian Pembayaran -->
+
+      <div class="account-details">
+        <p><strong>Scan QRIS untuk pembayaran:</strong></p>
+        <img
+          src="{{ url_for('static', filename='qris.png') }}"
+          alt="QRIS Pembayaran"
+        />
+        <p><strong>Total Pembayaran:</strong> Rp {{ cart_total|int }}</p>
+        <p><strong>Metode Pembayaran:</strong> QRIS</p>
+        <p><strong>Nama Pemilik Rekening:</strong> Sempiternal Coffee</p>
+      </div>
+
+      <!-- Tombol Aksi -->
+      <a
+        onclick="window.location.href='https://wa.me/6281219691590'"
+        class="btn"
+        >Kirim bukti pembayaran</a
+      >
+      <!-- Tombol Konfirmasi Pembayaran -->
+      <a href="/pc" class="btn btn-secondary">Konfirmasi Pembayaran</a>
+    </div>
+  </body>
+</html>

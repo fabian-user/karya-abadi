@@ -1,0 +1,27 @@
+{% extends "template.html" %} {% block content %}
+<section class="container">
+  <h1>Konfirmasi Hapus Produk</h1>
+
+  <p>Apakah Anda yakin ingin menghapus produk berikut dari keranjang?</p>
+
+  <div class="cart-item">
+    <img
+      src="{{ url_for('static', filename='uploads/' + product.image) }}"
+      alt="{{ product.name }}"
+      width="100"
+    />
+    <h5>{{ product.name }}</h5>
+    <p>Harga: Rp. {{ product.price|int }}</p>
+    <form
+      action="{{ url_for('pengahapusproduk', product_id=product.id) }}"
+      method="POST"
+    >
+      <button type="submit" class="btn btn-danger">Hapus dari Keranjang</button>
+    </form>
+  </div>
+
+  <a href="{{ url_for('view_cart') }}" class="btn btn-secondary"
+    >Kembali ke Keranjang</a
+  >
+</section>
+{% endblock %}

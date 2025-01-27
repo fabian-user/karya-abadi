@@ -1,0 +1,67 @@
+{% extends "template.html" %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tb. Karya Abadi</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='home.css') }}"
+    />
+  </head>
+  <body>
+    <main>
+      <div class="header-content">
+        <div class="text-content">
+          <h2>Beli Kebutuhan Bahan Bangunan Hanya di Tb. Karya Abadi</h2>
+          <h3>Tidak perlu keluar rumah, cukup pesan dengan gadget anda.</h3>
+        </div>
+        <img
+          src="{{ url_for('static', filename='home.png') }}"
+          alt="Banner"
+          class="header-image"
+        />
+      </div>
+
+      <section class="categories">
+        <h1>Kategori</h1>
+        <div class="category-cards">
+          {% for category in categories %}
+          <div class="category-card">
+            <a
+              href="{{ url_for('products_by_category', category_id=category.id) }}"
+              class="category-link"
+            >
+              <div class="card-content">
+                <h3>{{ category.name }}</h3>
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="products">
+        <h1>Produk</h1>
+        <ul class="product-list">
+          {% for product in products %}
+          <li class="product-card">
+            <a href="{{ url_for('product_detail', product_id=product.id) }}">
+              <img
+                src="{{ url_for('static', filename='uploads/' + product.image if product.image else 'default-image.jpg') }}"
+                alt="{{ product.name }}"
+                class="product-image"
+              />
+              <h4 class="product-name">{{ product.name }}</h4>
+              <p class="product-description">{{ product.description }}</p>
+              <p class="product-price">Harga: Rp. {{ product.price|int }}</p>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
+{% endblock %}

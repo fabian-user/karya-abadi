@@ -1,0 +1,110 @@
+{% extends "template.html" %} {% block content %}
+<section class="product-detail">
+  <h1>{{ product.name }}</h1>
+  <div class="product-image">
+    <img
+      src="{{ url_for('static', filename='uploads/' + (product.image if product.image else 'default-image.jpg')) }}"
+      alt="{{ product.name }}"
+      class="img-medium"
+    />
+  </div>
+  <p class="product-description">{{ product.description }}</p>
+  <p class="price">Price: Rp. {{ product.price|int }}</p>
+
+  <form
+    action="{{ url_for('add_to_cart', product_id=product.id) }}"
+    method="POST"
+    class="add-to-cart-form"
+  >
+    <button type="submit" class="btn btn-primary">Masukkan ke Keranjang</button>
+  </form>
+</section>
+
+<style>
+  /* Resetting basic margin and padding */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    font-family: "Arial", sans-serif;
+    height: 100%;
+    overflow-x: hidden;
+  }
+
+  .product-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px; /* Mengurangi padding untuk memperkecil ukuran konten */
+    max-width: 700px; /* Mengurangi lebar maksimal */
+    margin: 40px auto;
+    overflow: hidden;
+    min-height: 500px;
+  }
+
+  .product-detail h1 {
+    font-size: 28px; /* Mengurangi ukuran judul */
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 15px;
+  }
+
+  .product-image {
+    max-width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .img-medium {
+    width: 50%; /* Mengatur lebar gambar menjadi 50% */
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .product-description {
+    font-size: 16px; /* Mengurangi ukuran teks deskripsi */
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+
+  .price {
+    font-size: 20px; /* Mengurangi ukuran font harga */
+    color: #e74c3c;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .add-to-cart-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .add-to-cart-form button {
+    background-color: #ffc107;
+    color: white;
+    padding: 12px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .add-to-cart-form button:hover {
+    background-color: #e0a800;
+  }
+</style>
+{% endblock %}

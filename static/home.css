@@ -1,0 +1,169 @@
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header,
+footer {
+  background: #333;
+  color: #ffffff;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+  background-color: #f4f4f4;
+}
+
+.text-content {
+  max-width: 50%;
+}
+
+.categories {
+  padding: 20px;
+}
+
+.category-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.category-card {
+  width: 200px;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+  transform: scale(1.05);
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.category-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.category-link h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.header-image {
+  max-width: 40%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.categories,
+.products {
+  padding: 2rem;
+  text-align: center;
+}
+
+.category-list,
+.product-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.category-link,
+.product-card a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+  text-align: center;
+}
+
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  max-width: 200px;
+  padding: 1rem;
+  background: #fff;
+  transition: transform 0.2s;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+}
+
+.product-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.product-name {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.product-description {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.product-price {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #e63946;
+}
+
+footer {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #ffc107;
+}
+
+.nav-link {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+button {
+  background-color: #ff6f61; /* Warna dasar */
+  color: white; /* Warna teks */
+  border: none; /* Menghilangkan border */
+  border-radius: 25px; /* Membuat sudut membulat */
+  padding: 12px 20px; /* Mengatur ruang dalam tombol */
+  font-size: 16px; /* Ukuran font */
+  font-weight: bold; /* Teks tebal */
+  cursor: pointer; /* Ubah kursor menjadi tangan saat hover */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Menambahkan bayangan */
+  transition: all 0.3s ease; /* Efek transisi */
+}
+
+button:hover {
+  background-color: #e65b50; /* Warna saat di-hover */
+  transform: scale(1.05); /* Sedikit memperbesar tombol */
+}
+
+button:active {
+  background-color: #cc4a40; /* Warna saat diklik */
+  transform: scale(1); /* Mengembalikan ukuran saat diklik */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Mengurangi bayangan saat klik */
+}

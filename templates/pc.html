@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pembelian Berhasil!</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='pc.css') }}" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="message-box">
+        <!-- Logo Image -->
+        <div class="logo">
+          <img
+            src="{{ url_for('static', filename='logo.png') }}"
+            alt="Logo"
+            class="logo-img"
+          />
+        </div>
+
+        <h1>Terima kasih telah berbelanja di Tb. Karya Abadi!</h1>
+        <p>
+          Pesanan Anda telah berhasil diproses. Kami akan segera mengemas barang
+          Anda.
+        </p>
+        <p>Metode pembayaran yang Anda gunakan: <strong>{{ payment_method }}</strong></p>
+        <p>Silakan klik tombol di bawah untuk kembali ke beranda.</p>
+        <a href="{{ url_for('home') }}" class="btn">Kembali Berbelanja Lagi</a>
+      </div>
+    </div>
+  </body>
+</html> 

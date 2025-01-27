@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title }}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="navbar-container">
+        <!-- Logo -->
+        <div class="navbar-item">
+          <a href="/">
+            <img
+              src="{{ url_for('static', filename='logo.png') }}"
+              alt="Logo"
+              class="logo"
+            />
+          </a>
+        </div>
+        <!-- Search Bar -->
+        <div class="navbar-item search-bar">
+          <form action="{{ url_for('search') }}" method="get">
+            <input type="text" name="search" placeholder="Cari produk..." />
+            <button class="btn-search" >Search</button>
+          </form>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="navbar-item" style="position: relative;">
+          <a class="nav-link" href="{{ url_for('view_cart') }}" style="position: relative;">
+            <img
+              src="{{ url_for('static', filename='shopping-bag.svg') }}"
+              alt="triangle with all three sides equal"
+              height="38"
+              width="38"
+            />
+            <span
+              class="badge bg-danger"
+              style="
+                position: absolute;
+                top: -5px;
+                right: -5px;
+                background-color: red;
+                color: white;
+                border-radius: 50%;
+                padding: 2px 6px;
+                font-size: 12px;
+              "
+            >
+              {% if session.get('cart') %} {{ session['cart']|length }} {% else %} 0 {% endif %}
+            </span>
+          </a>
+          <a class="btn-signin" href="{{ url_for('loginadmin') }}">Admin</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4">{% block content %} {% endblock %}</div>
+
+    <!-- Footer -->
+    <footer>
+      <button onclick="window.location.href='/about'" class="btn-footer">
+        Tentang Kami
+      </button>
+      <button
+        onclick="window.location.href='https://wa.me/6281219691590'"
+        class="btn-footer"
+      >
+        WhatsApp
+      </button>
+      <button onclick="window.location.href='/faq'" class="btn-footer">
+        FAQ
+      </button>
+      
+    </footer>
+  </body>
+</html>

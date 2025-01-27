@@ -1,0 +1,91 @@
+{% extends "template.html" %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='faq.css') }}" />
+  </head>
+  <body>
+    <div class="faq-container">
+      <h1>Frequently Asked Questions (FAQ)</h1>
+      <div class="faq-item">
+        <button class="faq-question">Bagaimana cara pembayarannya?</button>
+        <div class="faq-answer">
+          <p>
+            Jika ingin pembayaran anda harus masukkan produk kami ke dalam
+            keranjang terlebih dahulu, setelah masukkan dalam keranjang anda
+            bisa mengklik keranjang dan lakukan pembayaran di halaman tersebut.
+            Kami menyediakan 3 metode pembayaran diantara lain BCA, Mandiri, dan
+            QRIS anda dapat memilih salah satu dari metode yang kami siapkan.
+          </p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Jam operasional toko beroperasi jam berapa?
+        </button>
+        <div class="faq-answer">
+          <p>
+            Jam operasional toko kami di pukul 07.00 sampai dengan 15.00 kami
+            buka setiap hari, begitu pun dengan admin toko kami akan merespon
+            pesan anda di jam operasional toko kami.
+          </p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Apakah tersedia layanan pengiriman barang?
+        </button>
+        <div class="faq-answer">
+          <p>
+            Kami menyediakan metode pengambilan barang dan pengiriman barang,
+            jika anda ingin melakukan pengiriman anda dapat mengkonfirmasi
+            melalui whatsapp yang tertera pada website kami
+          </p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Apa saja produk yang tersedia?</button>
+        <div class="faq-answer">
+          <p>
+            Kami menyediakan bahan berbagai produk untuk kebutuhan konstruksi
+            dan renovasi, dan kami juga menyediakan perlengkapan eksterior dan
+            interior.
+          </p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Bagaimana cara melakukan pemesanan?
+        </button>
+        <div class="faq-answer">
+          <p>
+            Anda dapat memilih produk yang anda butuhkan bisa dari category atau
+            produk sesuai dengan kebutuhan anda, setelah itu anda dapat mengklik
+            tombol lihat detail, lalu anda dapat memasukan ke keranjang anda.
+            Anda juga dapat melihat pesanan anda di dalam cart.
+          </p>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const questions = document.querySelectorAll(".faq-question");
+
+        questions.forEach((question) => {
+          question.addEventListener("click", () => {
+            const answer = question.nextElementSibling;
+            const isVisible = answer.style.display === "block";
+            document
+              .querySelectorAll(".faq-answer")
+              .forEach((el) => (el.style.display = "none"));
+            answer.style.display = isVisible ? "none" : "block";
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
+{% endblock %}

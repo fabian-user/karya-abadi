@@ -1,0 +1,71 @@
+{% extends "template.html" %} {% block content %}
+<style>
+  /* Gaya untuk gambar */
+  .product-item img {
+    max-width: 150px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* Gaya untuk teks di tengah */
+  .product-item {
+    text-align: center; /* Pastikan semua teks di tengah */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Hilangkan margin default pada h2 */
+  .product-item h2 {
+    margin: 0;
+    margin-top: 10px; /* Tambahkan jarak atas */
+    margin-bottom: 10px; /* Tambahkan jarak bawah */
+    text-align: center;
+  }
+
+  .product-item .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #ffc107;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .product-item .btn:hover {
+    background-color: #af8403;
+  }
+</style>
+
+<h1>Hasil Pencarian untuk {{ query }}</h1>
+
+{% if products %}
+<div class="product-list">
+  {% for product in products %}
+  <div class="product-item">
+    <img
+      src="{{ url_for('static', filename='uploads/' + product.image) }}"
+      alt="{{ product.name }}"
+    />
+    <h2>{{ product.name }}</h2>
+    <p>{{ product.description }}</p>
+    <p>Harga: Rp {{ product.price }}</p>
+    <a
+      href="{{ url_for('product_detail', product_id=product.id) }}"
+      class="btn"
+    >
+      Lihat Detail
+    </a>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<p>Tidak ada produk yang cocok dengan pencarian Anda.</p>
+{% endif %} {% endblock %}
